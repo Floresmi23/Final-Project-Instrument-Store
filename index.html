@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Final Project: Instrument Store</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="store-app">
+  <div class="item" v-bind:class="inst.brand" v-for="(inst, index) in instruments" v-on:click="PUDetails(inst, index)">
+    <img v-bind:src="inst.img" @error="imageUrlAlt">
+    <div class="instName" v-bind:brand="inst.brand">{{inst.name}}</div>
+    <button class="addToCartButton" v-on:click="addToCart(inst, index)" v-on:click.stop>Add to Cart</button>
+  </div>
+  
+  
+  
+  
+  
+<!-- Image basic information to add and to see information about the instruments. -->
+  <div class="popUp" v-if="PU" v-on:click="PU=false">
+    <div class="inst" v-on:click.stop>
+      <button class="xButton" v-on:click="PU=false">X</button>
+      <h2><b>Name:</b> {{PUItem.name}}</h2>
+      <img v-bind:src="PUItem.img" @error="imageUrlAlt">
+      <h2><b>Type:</b> {{PUItem.type}}</h2>
+      <h2><b>Brand:</b> {{PUItem.brand}}</h2>
+      <h2><b>Price:</b> ${{PUItem.price}}</h2>
+      <button class="addToCartButton" v-on:click="addToCart2(PUItem); PU=false">Add to Cart</button>
+    </div>
+  </div>
+
+  
+  
+  
+  
+  
+  
+ 
+
+<!--  Start of button to the left -->
+  <div class="newButton" v-on:click="NI=true">Add New Instrument</div>
+ <h1 class="storeEmpty" v-if="Empty"> Add New Instruments </h1>
+  
+  
+<!--  This is where the cart button is called and infortmation is pulled.  -->
+  
+  <div class="cartButton" v-on:click="emptyCart">Cart</div>
+  <div class="cartCount" v-on:click="emptyCart">{{CITEMS.length}}</div>
+  <div class="newInstrument" v-if="NI" v-on:click="removePU">
+    <form class="formStyle" v-on:click.stop>
+      <button class="xButton" v-on:click="removePU">X</button>
+      <h2>Fill out information to add new instrument</h2>
+      <input class="inputStyler" placeholder="Instrument Name" v-model="name1" required>
+      <input class="inputStyler" placeholder="Instrument Type" v-model="type1" required>
+      
+      
+      
+      
+      
+      <input class="inputStyler" placeholder="Instrument Price" v-model="price1" type="number" required>
+      <input class="inputStyler" placeholder="Image URL here. If none leave empty." v-model="img1">
+      <div class="whatLeft">{{whatLeft}}</div>
+      <h3>Select a brand:</h3>
+      <div class="radioRow">
+    
+        
+        
+        
+        
+        <label for="matonLabel" class="labelFix">
+          <input class="option-input radio" type="radio" value="Maton" v-model="brand1"
+        checked>Maton
+        </label>
+        <label for="yamahaLabel" class="labelFix">
+          <input class="option-input radio" type="radio" value="Yamaha" v-model="brand1">
+          Yamaha
+        </label>
+        <label for="fenderLabel" class="labelFix">
+          <input class="option-input radio" type="radio" value="Fender" v-model="brand1">
+          Fender
+        </label>
+      </div>
+      
+      
+      
+      
+      
+      
+      <button class="submitStyle" type="submit" v-if="reqsMet" v-on:click="NINST">Add Instrument</button> 
+      <button class="submitStyle" type="submit" v-if="!reqsMet">Add Instrument</button> 
+    </form>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
